@@ -10,7 +10,8 @@ var (
 	// Payments
 	CreateInvoice                 Endpoint = "/v1/payment"
 	CreateStaticWallet            Endpoint = "/v1/wallet"
-	GenerateQRCode                Endpoint = "/v1/wallet/qr"
+	GenerateQRCodeWallet          Endpoint = "/v1/wallet/qr"
+	GenerateQRCodeInvoice         Endpoint = "/v1/payment/qr"
 	BlockStaticWallet             Endpoint = "/v1/wallet/block-address"
 	RefundPaymentOnBlockedAddress Endpoint = "/v1/wallet/blocked-address-refund"
 	PaymentInformation            Endpoint = "/v1/payment/info"
