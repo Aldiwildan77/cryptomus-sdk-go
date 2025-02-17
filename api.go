@@ -1,4 +1,4 @@
-package main
+package cryptomus_sdk_go
 
 type Endpoint string
 
@@ -8,40 +8,48 @@ var (
 
 var (
 	// Payments
-	CreateInvoice                 Endpoint = "/v1/payment"
-	CreateStaticWallet            Endpoint = "/v1/wallet"
-	GenerateQRCodeWallet          Endpoint = "/v1/wallet/qr"
-	GenerateQRCodeInvoice         Endpoint = "/v1/payment/qr"
-	BlockStaticWallet             Endpoint = "/v1/wallet/block-address"
-	RefundPaymentOnBlockedAddress Endpoint = "/v1/wallet/blocked-address-refund"
-	PaymentInformation            Endpoint = "/v1/payment/info"
-	Refund                        Endpoint = "/v1/payment/refund"
-	ResendWebhook                 Endpoint = "/v1/payment/resend"
-	TestingWebhook                Endpoint = "/v1/test-webhook/payment"
-	PaymentListOfServices         Endpoint = "/v1/payment/services"
-	PaymentHistory                Endpoint = "/v1/payment/list"
+	CreateInvoiceEndpoint                 Endpoint = "/v1/payment"
+	CreateStaticWalletEndpoint            Endpoint = "/v1/wallet"
+	GenerateQRCodeWalletEndpoint          Endpoint = "/v1/wallet/qr"
+	GenerateQRCodeInvoiceEndpoint         Endpoint = "/v1/payment/qr"
+	BlockStaticWalletEndpoint             Endpoint = "/v1/wallet/block-address"
+	RefundPaymentOnBlockedAddressEndpoint Endpoint = "/v1/wallet/blocked-address-refund"
+	PaymentInformationEndpoint            Endpoint = "/v1/payment/info"
+	RefundEndpoint                        Endpoint = "/v1/payment/refund"
+	ResendWebhookEndpoint                 Endpoint = "/v1/payment/resend"
+	TestingWebhookEndpoint                Endpoint = "/v1/test-webhook/payment"
+	PaymentListOfServicesEndpoint         Endpoint = "/v1/payment/services"
+	PaymentHistoryEndpoint                Endpoint = "/v1/payment/list"
 
 	// Payouts
-	CreatePayout             Endpoint = "/v1/payout"
-	PayoutInformation        Endpoint = "/v1/payout/info"
-	PayoutHistory            Endpoint = "/v1/payout/list"
-	PayoutListOfServices     Endpoint = "/v1/payout/services"
-	TransferToPersonalWallet Endpoint = "/v1/transfer/to-personal"
-	TransferToBusinessWallet Endpoint = "/v1/transfer/to-business"
+	CreatePayoutEndpoint             Endpoint = "/v1/payout"
+	PayoutInformationEndpoint        Endpoint = "/v1/payout/info"
+	PayoutHistoryEndpoint            Endpoint = "/v1/payout/list"
+	PayoutListOfServicesEndpoint     Endpoint = "/v1/payout/services"
+	TransferToPersonalWalletEndpoint Endpoint = "/v1/transfer/to-personal"
+	TransferToBusinessWalletEndpoint Endpoint = "/v1/transfer/to-business"
 
 	// Recurring Payments
-	CreateRecurringPayment      Endpoint = "/v1/recurrence/create"
-	RecurringPaymentInformation Endpoint = "/v1/recurrence/info"
-	ListRecurringPayments       Endpoint = "/v1/recurrence/list"
-	CancelRecurringPayment      Endpoint = "/v1/recurrence/cancel"
+	CreateRecurringPaymentEndpoint      Endpoint = "/v1/recurrence/create"
+	RecurringPaymentInformationEndpoint Endpoint = "/v1/recurrence/info"
+	ListRecurringPaymentsEndpoint       Endpoint = "/v1/recurrence/list"
+	CancelRecurringPaymentEndpoint      Endpoint = "/v1/recurrence/cancel"
 
 	// Exchange Rate
-	ExchangeRateList Endpoint = "/v1/exchange-rate/{currency}/list"
+	ExchangeRateListEndpoint Endpoint = "/v1/exchange-rate/%s/list"
 
 	// Discount Payment
-	ListOfDiscounts            Endpoint = "/v1/payment/discount/list"
-	SetDiscountToPaymentMethod Endpoint = "/v1/payment/discount/set"
+	ListOfDiscountsEndpoint            Endpoint = "/v1/payment/discount/list"
+	SetDiscountToPaymentMethodEndpoint Endpoint = "/v1/payment/discount/set"
 
 	// Balance
-	Balance Endpoint = "/v1/balance"
+	BalanceEndpoint Endpoint = "/v1/balance"
 )
+
+func (e Endpoint) String() string {
+	return string(e)
+}
+
+func (e Endpoint) URL() string {
+	return Host + e.String()
+}
