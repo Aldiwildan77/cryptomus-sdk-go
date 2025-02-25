@@ -1,6 +1,20 @@
 package cryptomus_sdk_go
 
-import "context"
+import (
+	"context"
+	"time"
+)
+
+type PayoutStatus string
+
+const (
+	PayoutStatusProcess    PayoutStatus = "process"
+	PayoutStatusCheck      PayoutStatus = "check"
+	PayoutStatusPaid       PayoutStatus = "paid"
+	PayoutStatusFail       PayoutStatus = "fail"
+	PayoutStatusCancel     PayoutStatus = "cancel"
+	PayoutStatusSystemFail PayoutStatus = "system_fail"
+)
 
 type CreatePayoutRequest struct {
 	Amount       string `json:"amount"`
@@ -17,23 +31,25 @@ type CreatePayoutRequest struct {
 	Memo         string `json:"memo"`
 }
 
-type CreatePayoutData struct {
-	UUID          string        `json:"uuid"`
-	Amount        string        `json:"amount"`
-	Currency      string        `json:"currency"`
-	Network       string        `json:"network"`
-	Address       string        `json:"address"`
-	TxID          string        `json:"txid"`
-	Status        PaymentStatus `json:"status"`
-	IsFinal       bool          `json:"is_final"`
-	Balance       int64         `json:"balance"`
-	PayerCurrency string        `json:"payer_currency"`
-	PayerAmount   int64         `json:"payer_amount"`
+type PayoutData struct {
+	UUID          string       `json:"uuid"`
+	Amount        string       `json:"amount"`
+	Currency      string       `json:"currency"`
+	Network       string       `json:"network"`
+	Address       string       `json:"address"`
+	TxID          string       `json:"txid"`
+	Status        PayoutStatus `json:"status"`
+	IsFinal       bool         `json:"is_final"`
+	Balance       int64        `json:"balance"`
+	PayerCurrency string       `json:"payer_currency"`
+	PayerAmount   int64        `json:"payer_amount"`
+	CreatedAt     time.Time    `json:"created_at"`
+	UpdatedAt     time.Time    `json:"updated_at"`
 }
 
 type CreatePayoutResponse struct {
 	*HTTPResponse
-	Result *CreatePayoutData `json:"result"`
+	Result *PayoutData `json:"result"`
 }
 
 func (sdk *Cryptomus) CreatePayout(ctx context.Context, payload *CreatePayoutRequest) (*CreatePayoutResponse, error) {
@@ -54,6 +70,202 @@ func (sdk *Cryptomus) CreatePayout(ctx context.Context, payload *CreatePayoutReq
 		SetBody(payloadByte)
 
 	if _, err := req.Post(CreatePayoutEndpoint.URL()); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+type PayoutInformationRequest struct {
+	UUID    string `json:"uuid,omitempty"`
+	OrderID string `json:"order_id,omitempty"`
+}
+
+type PayoutInformationResponse struct {
+	*HTTPResponse
+	Result *PayoutData `json:"result"`
+}
+
+func (sdk *Cryptomus) PayoutInformation(ctx context.Context, payload *PayoutInformationRequest) (*PayoutInformationResponse, error) {
+	var result PayoutInformationResponse
+
+	payloadByte, err := ToJSON(payload)
+	if err != nil {
+		return nil, err
+	}
+
+	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
+		SetHeader("merchant", sdk.Merchant).
+		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("Content-Type", "application/json").
+		SetSuccessResult(&result).
+		SetErrorResult(&result).
+		SetBody(payloadByte)
+
+	if _, err := req.Post(PayoutInformationEndpoint.URL()); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+type PayoutHistoryRequest struct {
+	DateFrom string `json:"date_from,omitempty"`
+	DateTo   string `json:"date_to,omitempty"`
+}
+
+type PayoutHistoryData struct {
+	MerchantUUID string        `json:"merchant_uuid"`
+	Items        []*PayoutData `json:"items"`
+	Paginate     *Pagination   `json:"paginate"`
+}
+
+type PayoutHistoryResponse struct {
+	*HTTPResponse
+	Result *PayoutHistoryData `json:"result"`
+}
+
+func (sdk *Cryptomus) PayoutHistory(ctx context.Context, payload *PayoutHistoryRequest) (*PayoutHistoryResponse, error) {
+	var result PayoutHistoryResponse
+
+	payloadByte, err := ToJSON(payload)
+	if err != nil {
+		return nil, err
+	}
+
+	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
+		SetHeader("merchant", sdk.Merchant).
+		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("Content-Type", "application/json").
+		SetSuccessResult(&result).
+		SetErrorResult(&result).
+		SetBody(payloadByte)
+
+	if _, err := req.Post(PayoutHistoryEndpoint.URL()); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+type PayoutListOfServiceLimit struct {
+	MinAmount string `json:"min_amount"`
+	MaxAmount string `json:"max_amount"`
+}
+
+type PayoutListOfServiceCommission struct {
+	FeeAmount string `json:"fee_amount"`
+	Percent   string `json:"percent"`
+}
+
+type PayoutListOfServicesData struct {
+	Network     string                         `json:"network"`
+	Currency    string                         `json:"currency"`
+	IsAvailable bool                           `json:"is_available"`
+	Limit       PaymentListOfServiceLimit      `json:"limit"`
+	Commission  PaymentListOfServiceCommission `json:"commission"`
+}
+
+type PayoutListOfServicesResponse struct {
+	*HTTPResponse
+	Result []*PayoutListOfServicesData `json:"result"`
+}
+
+func (sdk *Cryptomus) PayoutListOfServices(ctx context.Context) (*PayoutListOfServicesResponse, error) {
+	var result PayoutListOfServicesResponse
+
+	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
+		SetHeader("merchant", sdk.Merchant).
+		SetHeader("sign", Sign(sdk.PaymentToken, "")).
+		SetSuccessResult(&result).
+		SetErrorResult(&result)
+
+	if _, err := req.Get(PayoutListOfServicesEndpoint.URL()); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+type TransferToPersonalWalletRequest struct {
+	Amount   string `json:"amount" validate:"required"`
+	Currency string `json:"currency" validate:"required"`
+}
+
+type TransferToPersonalWalletData struct {
+	UserWalletTransactionUUID string `json:"user_wallet_transaction_uuid"`
+	UserWalletBalance         string `json:"user_wallet_balance"`
+	MerchantTransactionUUID   string `json:"merchant_transaction_uuid"`
+	MerchantBalance           string `json:"merchant_balance"`
+}
+
+type TransferToPersonalWalletResponse struct {
+	*HTTPResponse
+	Result *TransferToPersonalWalletData `json:"result"`
+}
+
+func (sdk *Cryptomus) TransferToPersonalWallet(ctx context.Context, payload *TransferToPersonalWalletRequest) (*TransferToPersonalWalletResponse, error) {
+	var result TransferToPersonalWalletResponse
+
+	payloadByte, err := ToJSON(payload)
+	if err != nil {
+		return nil, err
+	}
+
+	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
+		SetHeader("merchant", sdk.Merchant).
+		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("Content-Type", "application/json").
+		SetSuccessResult(&result).
+		SetErrorResult(&result).
+		SetBody(payloadByte)
+
+	if _, err := req.Post(TransferToPersonalWalletEndpoint.URL()); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+type TransferToBusinessWalletRequest struct {
+	Amount   string `json:"amount" validate:"required"`
+	Currency string `json:"currency" validate:"required"`
+}
+
+type TransferToBusinessWalletData struct {
+	UserWalletTransactionUUID string `json:"user_wallet_transaction_uuid"`
+	UserWalletBalance         string `json:"user_wallet_balance"`
+	MerchantTransactionUUID   string `json:"merchant_transaction_uuid"`
+	MerchantBalance           string `json:"merchant_balance"`
+}
+
+type TransferToBusinessWalletResponse struct {
+	*HTTPResponse
+	Result *TransferToBusinessWalletData `json:"result"`
+}
+
+func (sdk *Cryptomus) TransferToBusinessWallet(ctx context.Context, payload *TransferToBusinessWalletRequest) (*TransferToBusinessWalletResponse, error) {
+	var result TransferToBusinessWalletResponse
+
+	payloadByte, err := ToJSON(payload)
+	if err != nil {
+		return nil, err
+	}
+
+	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
+		SetHeader("merchant", sdk.Merchant).
+		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("Content-Type", "application/json").
+		SetSuccessResult(&result).
+		SetErrorResult(&result).
+		SetBody(payloadByte)
+
+	if _, err := req.Post(TransferToBusinessWalletEndpoint.URL()); err != nil {
 		return nil, err
 	}
 
