@@ -25,20 +25,22 @@ func New(options ...Option) *Cryptomus {
 	return cryptomus
 }
 
-func DefaultCryptomus() *Cryptomus {
-	maxTimeout := 10 * time.Second
+func DefaultHTTPClient() *req.Client {
+	maxTimeout := 5 * time.Second
 	userAgent := "Cryptomus SDK Go"
 
-	httpClient := req.
+	return req.
 		NewClient().
 		SetTimeout(maxTimeout).
 		SetUserAgent(userAgent).
 		SetCommonHeader("Content-Type", "application/json").
 		SetCommonHeader("X-SDK-Language", "go").
 		EnableDumpAllAsync()
+}
 
+func DefaultCryptomus() *Cryptomus {
 	return New(
-		WithHttpClient(httpClient),
+		WithHttpClient(DefaultHTTPClient()),
 	)
 }
 
