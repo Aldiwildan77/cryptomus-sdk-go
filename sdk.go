@@ -48,9 +48,9 @@ func WithHttpClient(client *req.Client) Option {
 	}
 }
 
-func WithMerchantID(merchantID string) Option {
+func WithMerchant(merchant string) Option {
 	return func(c *Cryptomus) {
-		c.Merchant = merchantID
+		c.Merchant = merchant
 	}
 }
 
