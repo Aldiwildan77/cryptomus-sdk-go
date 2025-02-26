@@ -1,4 +1,4 @@
-package cryptomus_sdk_go
+package cryptomus
 
 import "context"
 
@@ -33,7 +33,6 @@ func (sdk *Cryptomus) Balance(ctx context.Context) (*BalanceResponse, error) {
 
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
 

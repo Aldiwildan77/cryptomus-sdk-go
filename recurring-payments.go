@@ -1,4 +1,4 @@
-package cryptomus_sdk_go
+package cryptomus
 
 import (
 	"context"
@@ -58,7 +58,6 @@ func (sdk *Cryptomus) CreateRecurringPayment(ctx context.Context, request Create
 	req := sdk.HttpClient.NewRequest().
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
-		SetHeader("Content-Type", "application/json").
 		SetBody(reqByte).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -91,7 +90,6 @@ func (sdk *Cryptomus) RecurringPaymentInformation(ctx context.Context, request R
 	req := sdk.HttpClient.NewRequest().
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
-		SetHeader("Content-Type", "application/json").
 		SetBody(reqByte).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -128,7 +126,6 @@ func (sdk *Cryptomus) ListRecurringPayments(ctx context.Context, request ListRec
 	req := sdk.HttpClient.NewRequest().
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
-		SetHeader("Content-Type", "application/json").
 		SetQueryParam("cursor", request.Cursor).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -161,7 +158,6 @@ func (sdk *Cryptomus) CancelRecurringPayment(ctx context.Context, request Cancel
 	req := sdk.HttpClient.NewRequest().
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
-		SetHeader("Content-Type", "application/json").
 		SetBody(reqByte).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)

@@ -1,4 +1,4 @@
-package cryptomus_sdk_go
+package cryptomus
 
 import (
 	"crypto/md5"

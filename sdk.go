@@ -1,6 +1,8 @@
-package cryptomus_sdk_go
+package cryptomus
 
 import (
+	"time"
+
 	"github.com/imroc/req/v3"
 )
 
@@ -14,15 +16,36 @@ type Cryptomus struct {
 type Option func(*Cryptomus)
 
 func New(options ...Option) *Cryptomus {
-	cryptomus := &Cryptomus{
-		HttpClient: req.NewClient(),
-	}
+	cryptomus := DefaultCryptomus()
 
 	for _, option := range options {
 		option(cryptomus)
 	}
 
 	return cryptomus
+}
+
+func DefaultCryptomus() *Cryptomus {
+	maxTimeout := 10 * time.Second
+	userAgent := "Cryptomus SDK Go"
+
+	httpClient := req.
+		NewClient().
+		SetTimeout(maxTimeout).
+		SetUserAgent(userAgent).
+		SetCommonHeader("Content-Type", "application/json").
+		SetCommonHeader("X-SDK-Language", "go").
+		EnableDumpAllAsync()
+
+	return New(
+		WithHttpClient(httpClient),
+	)
+}
+
+func WithHttpClient(client *req.Client) Option {
+	return func(c *Cryptomus) {
+		c.HttpClient = client
+	}
 }
 
 func WithMerchantID(merchantID string) Option {

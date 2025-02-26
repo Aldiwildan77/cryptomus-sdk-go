@@ -1,4 +1,4 @@
-package cryptomus_sdk_go
+package cryptomus
 
 import (
 	"context"
@@ -64,7 +64,6 @@ func (sdk *Cryptomus) CreatePayout(ctx context.Context, payload *CreatePayoutReq
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -98,7 +97,6 @@ func (sdk *Cryptomus) PayoutInformation(ctx context.Context, payload *PayoutInfo
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -138,7 +136,6 @@ func (sdk *Cryptomus) PayoutHistory(ctx context.Context, payload *PayoutHistoryR
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -219,7 +216,6 @@ func (sdk *Cryptomus) TransferToPersonalWallet(ctx context.Context, payload *Tra
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -260,7 +256,6 @@ func (sdk *Cryptomus) TransferToBusinessWallet(ctx context.Context, payload *Tra
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)

@@ -1,4 +1,4 @@
-package cryptomus_sdk_go
+package cryptomus
 
 import (
 	"context"
@@ -25,7 +25,6 @@ func (sdk *Cryptomus) ExchangeRateList(ctx context.Context, currency string) (*E
 
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
 

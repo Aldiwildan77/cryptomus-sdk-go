@@ -1,4 +1,4 @@
-package cryptomus_sdk_go
+package cryptomus
 
 import (
 	"context"
@@ -25,7 +25,6 @@ func (sdk *Cryptomus) ListOfDiscount(ctx context.Context) (*ListOfDiscountRespon
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, "")).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
 
@@ -60,7 +59,6 @@ func (sdk *Cryptomus) SetDiscountToPaymentMethod(ctx context.Context, request Se
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
-		SetHeader("Content-Type", "application/json").
 		SetBody(request).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)

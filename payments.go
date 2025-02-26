@@ -1,4 +1,4 @@
-package cryptomus_sdk_go
+package cryptomus
 
 import (
 	"context"
@@ -76,7 +76,6 @@ func (sdk *Cryptomus) CreateInvoice(ctx context.Context, payload *CreateInvoiceR
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -122,7 +121,6 @@ func (sdk *Cryptomus) CreateStaticWallet(ctx context.Context, payload *CreateSta
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -159,7 +157,6 @@ func (sdk *Cryptomus) GenerateQRStaticWallet(ctx context.Context, payload *Gener
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -196,7 +193,6 @@ func (sdk *Cryptomus) GenerateQRCodeInvoice(ctx context.Context, payload *Genera
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -244,7 +240,6 @@ func (sdk *Cryptomus) BlockStaticWallet(ctx context.Context, payload *BlockStati
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -284,7 +279,6 @@ func (sdk *Cryptomus) RefundPaymentOnBlockedAddress(ctx context.Context, payload
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -322,7 +316,6 @@ func (sdk *Cryptomus) PaymentInformation(ctx context.Context, payload *PaymentIn
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -360,7 +353,6 @@ func (sdk *Cryptomus) Refund(ctx context.Context, payload *RefundRequest) (*Refu
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -396,7 +388,6 @@ func (sdk *Cryptomus) ResendWebhook(ctx context.Context, payload *ResendWebhookR
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -452,7 +443,6 @@ func (sdk *Cryptomus) TestingWebhook(ctx context.Context, payload *TestingWebhoo
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
@@ -531,7 +521,6 @@ func (sdk *Cryptomus) PaymentHistory(ctx context.Context, payload *PaymentHistor
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
-		SetHeader("Content-Type", "application/json").
 		SetSuccessResult(&result).
 		SetErrorResult(&result).
 		SetBody(payloadByte)
