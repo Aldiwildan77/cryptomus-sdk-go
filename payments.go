@@ -67,18 +67,13 @@ type CreateInvoiceResponse struct {
 func (sdk *Cryptomus) CreateInvoice(ctx context.Context, payload *CreateInvoiceRequest) (*CreateInvoiceResponse, error) {
 	var result CreateInvoiceResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(CreateInvoiceEndpoint.URL()); err != nil {
 		return nil, err
@@ -112,18 +107,13 @@ type CreateStaticWalletResponse struct {
 func (sdk *Cryptomus) CreateStaticWallet(ctx context.Context, payload *CreateStaticWalletRequest) (*CreateStaticWalletResponse, error) {
 	var result CreateStaticWalletResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(CreateStaticWalletEndpoint.URL()); err != nil {
 		return nil, err
@@ -148,18 +138,13 @@ type GenerateQRCodeWalletResponse struct {
 func (sdk *Cryptomus) GenerateQRStaticWallet(ctx context.Context, payload *GenerateQRCodeWalletRequest) (*GenerateQRCodeWalletResponse, error) {
 	var result GenerateQRCodeWalletResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(GenerateQRCodeWalletEndpoint.URL()); err != nil {
 		return nil, err
@@ -184,18 +169,13 @@ type GenerateQRCodeInvoiceResponse struct {
 func (sdk *Cryptomus) GenerateQRCodeInvoice(ctx context.Context, payload *GenerateQRCodeInvoiceRequest) (*GenerateQRCodeInvoiceResponse, error) {
 	var result GenerateQRCodeInvoiceResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(GenerateQRCodeInvoiceEndpoint.URL()); err != nil {
 		return nil, err
@@ -231,18 +211,13 @@ type BlockStaticWalletResponse struct {
 func (sdk *Cryptomus) BlockStaticWallet(ctx context.Context, payload *BlockStaticWalletRequest) (*BlockStaticWalletResponse, error) {
 	var result BlockStaticWalletResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(BlockStaticWalletEndpoint.URL()); err != nil {
 		return nil, err
@@ -270,18 +245,13 @@ type RefundPaymentOnBlockedAddressResponse struct {
 func (sdk *Cryptomus) RefundPaymentOnBlockedAddress(ctx context.Context, payload *RefundPaymentOnBlockedAddressRequest) (*RefundPaymentOnBlockedAddressResponse, error) {
 	var result RefundPaymentOnBlockedAddressResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(RefundPaymentOnBlockedAddressEndpoint.URL()); err != nil {
 		return nil, err
@@ -307,18 +277,13 @@ type PaymentInformationResponse struct {
 func (sdk *Cryptomus) PaymentInformation(ctx context.Context, payload *PaymentInformationRequest) (*PaymentInformationResponse, error) {
 	var result PaymentInformationResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(PaymentInformationEndpoint.URL()); err != nil {
 		return nil, err
@@ -344,18 +309,13 @@ type RefundResponse struct {
 func (sdk *Cryptomus) Refund(ctx context.Context, payload *RefundRequest) (*RefundResponse, error) {
 	var result RefundResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(RefundEndpoint.URL()); err != nil {
 		return nil, err
@@ -379,18 +339,13 @@ type ResendWebhookResponse struct {
 func (sdk *Cryptomus) ResendWebhook(ctx context.Context, payload *ResendWebhookRequest) (*ResendWebhookResponse, error) {
 	var result ResendWebhookResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(ResendWebhookEndpoint.URL()); err != nil {
 		return nil, err
@@ -434,18 +389,13 @@ type TestingWebhookResponse struct {
 func (sdk *Cryptomus) TestingWebhook(ctx context.Context, payload *TestingWebhookRequest) (*TestingWebhookResponse, error) {
 	var result TestingWebhookResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(TestingWebhookEndpoint.URL()); err != nil {
 		return nil, err
@@ -512,18 +462,13 @@ type PaymentHistoryResponse struct {
 func (sdk *Cryptomus) PaymentHistory(ctx context.Context, payload *PaymentHistoryRequest) (*PaymentHistoryResponse, error) {
 	var result PaymentHistoryResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(PaymentHistoryEndpoint.URL()); err != nil {
 		return nil, err

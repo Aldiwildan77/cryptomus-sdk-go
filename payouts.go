@@ -59,18 +59,13 @@ func (sdk *Cryptomus) CreatePayout(payload *CreatePayoutRequest) (*CreatePayoutR
 func (sdk *Cryptomus) CreatePayoutWithContext(ctx context.Context, payload *CreatePayoutRequest) (*CreatePayoutResponse, error) {
 	var result CreatePayoutResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(CreatePayoutEndpoint.URL()); err != nil {
 		return nil, err
@@ -96,18 +91,13 @@ func (sdk *Cryptomus) PayoutInformation(payload *PayoutInformationRequest) (*Pay
 func (sdk *Cryptomus) PayoutInformationWithContext(ctx context.Context, payload *PayoutInformationRequest) (*PayoutInformationResponse, error) {
 	var result PayoutInformationResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(PayoutInformationEndpoint.URL()); err != nil {
 		return nil, err
@@ -139,18 +129,13 @@ func (sdk *Cryptomus) PayoutHistory(payload *PayoutHistoryRequest) (*PayoutHisto
 func (sdk *Cryptomus) PayoutHistoryWithContext(ctx context.Context, payload *PayoutHistoryRequest) (*PayoutHistoryResponse, error) {
 	var result PayoutHistoryResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(PayoutHistoryEndpoint.URL()); err != nil {
 		return nil, err
@@ -227,18 +212,13 @@ func (sdk *Cryptomus) TransferToPersonalWallet(payload *TransferToPersonalWallet
 func (sdk *Cryptomus) TransferToPersonalWalletWithContext(ctx context.Context, payload *TransferToPersonalWalletRequest) (*TransferToPersonalWalletResponse, error) {
 	var result TransferToPersonalWalletResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(TransferToPersonalWalletEndpoint.URL()); err != nil {
 		return nil, err
@@ -271,18 +251,13 @@ func (sdk *Cryptomus) TransferToBusinessWallet(payload *TransferToBusinessWallet
 func (sdk *Cryptomus) TransferToBusinessWalletWithContext(ctx context.Context, payload *TransferToBusinessWalletRequest) (*TransferToBusinessWalletResponse, error) {
 	var result TransferToBusinessWalletResponse
 
-	payloadByte, err := ToJSON(payload)
-	if err != nil {
-		return nil, err
-	}
-
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(payloadByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
-		SetErrorResult(&result).
-		SetBody(payloadByte)
+		SetErrorResult(&result)
 
 	if _, err := req.Post(TransferToBusinessWalletEndpoint.URL()); err != nil {
 		return nil, err

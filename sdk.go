@@ -24,9 +24,9 @@ func New(options ...Option) *Cryptomus {
 }
 
 func DefaultCryptomus() *Cryptomus {
-	return New(
-		WithHttpClient(DefaultHTTPClient()),
-	)
+	return &Cryptomus{
+		HttpClient: DefaultHTTPClient(),
+	}
 }
 
 func WithHttpClient(client *req.Client) Option {

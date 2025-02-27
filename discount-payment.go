@@ -50,24 +50,19 @@ type SetDiscountToPaymentMethodResponse struct {
 	Result Discount `json:"result,omitempty"`
 }
 
-func (sdk *Cryptomus) SetDiscountToPaymentMethod(request SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
-	return sdk.SetDiscountToPaymentMethodWithContext(context.Background(), request)
+func (sdk *Cryptomus) SetDiscountToPaymentMethod(payload SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
+	return sdk.SetDiscountToPaymentMethodWithContext(context.Background(), payload)
 }
 
-func (sdk *Cryptomus) SetDiscountToPaymentMethodWithContext(ctx context.Context, request SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
+func (sdk *Cryptomus) SetDiscountToPaymentMethodWithContext(ctx context.Context, payload SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
 
 	var result SetDiscountToPaymentMethodResponse
-
-	reqByte, err := ToJSON(request)
-	if err != nil {
-		return nil, err
-	}
 
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
-		SetBody(request).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
 

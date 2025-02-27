@@ -51,10 +51,10 @@ func (sdk *Cryptomus) CreateRecurringPayment(request CreateRecurringPaymentReque
 	return sdk.CreateRecurringPaymentWithContext(context.Background(), request)
 }
 
-func (sdk *Cryptomus) CreateRecurringPaymentWithContext(ctx context.Context, request CreateRecurringPaymentRequest) (*CreateRecurringPaymentResponse, error) {
+func (sdk *Cryptomus) CreateRecurringPaymentWithContext(ctx context.Context, payload CreateRecurringPaymentRequest) (*CreateRecurringPaymentResponse, error) {
 	var result CreateRecurringPaymentResponse
 
-	reqByte, err := ToJSON(request)
+	reqByte, err := ToJSON(payload)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func (sdk *Cryptomus) CreateRecurringPaymentWithContext(ctx context.Context, req
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
 		SetBody(reqByte).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -88,10 +88,10 @@ func (sdk *Cryptomus) RecurringPaymentInformation(request RecurringPaymentInform
 	return sdk.RecurringPaymentInformationWithContext(context.Background(), request)
 }
 
-func (sdk *Cryptomus) RecurringPaymentInformationWithContext(ctx context.Context, request RecurringPaymentInformationRequest) (*RecurringPaymentInformationResponse, error) {
+func (sdk *Cryptomus) RecurringPaymentInformationWithContext(ctx context.Context, payload RecurringPaymentInformationRequest) (*RecurringPaymentInformationResponse, error) {
 	var result RecurringPaymentInformationResponse
 
-	reqByte, err := ToJSON(request)
+	reqByte, err := ToJSON(payload)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func (sdk *Cryptomus) RecurringPaymentInformationWithContext(ctx context.Context
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
 		SetBody(reqByte).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -129,19 +129,14 @@ func (sdk *Cryptomus) ListRecurringPayments(request ListRecurringPaymentsRequest
 	return sdk.ListRecurringPaymentsWithContext(context.Background(), request)
 }
 
-func (sdk *Cryptomus) ListRecurringPaymentsWithContext(ctx context.Context, request ListRecurringPaymentsRequest) (*ListRecurringPaymentsResponse, error) {
+func (sdk *Cryptomus) ListRecurringPaymentsWithContext(ctx context.Context, payload ListRecurringPaymentsRequest) (*ListRecurringPaymentsResponse, error) {
 	var result ListRecurringPaymentsResponse
-
-	reqByte, err := ToJSON(request)
-	if err != nil {
-		return nil, err
-	}
 
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
-		SetQueryParam("cursor", request.Cursor).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetQueryParam("cursor", payload.Cursor).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
 
@@ -162,14 +157,14 @@ type CancelRecurringPaymentResponse struct {
 	Result RecurringPaymentData `json:"result,omitempty"`
 }
 
-func (sdk *Cryptomus) CancelRecurringPayment(request CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
-	return sdk.CancelRecurringPaymentWithContext(context.Background(), request)
+func (sdk *Cryptomus) CancelRecurringPayment(payload CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
+	return sdk.CancelRecurringPaymentWithContext(context.Background(), payload)
 }
 
-func (sdk *Cryptomus) CancelRecurringPaymentWithContext(ctx context.Context, request CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
+func (sdk *Cryptomus) CancelRecurringPaymentWithContext(ctx context.Context, payload CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
 	var result CancelRecurringPaymentResponse
 
-	reqByte, err := ToJSON(request)
+	reqByte, err := ToJSON(payload)
 	if err != nil {
 		return nil, err
 	}
@@ -177,7 +172,7 @@ func (sdk *Cryptomus) CancelRecurringPaymentWithContext(ctx context.Context, req
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
 		SetBody(reqByte).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
