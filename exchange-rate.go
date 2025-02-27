@@ -18,7 +18,11 @@ type ExchangeRateResponse struct {
 	Result ExchangeRateList `json:"result,omitempty"`
 }
 
-func (sdk *Cryptomus) ExchangeRateList(ctx context.Context, currency string) (*ExchangeRateResponse, error) {
+func (sdk *Cryptomus) ExchangeRateList(currency string) (*ExchangeRateResponse, error) {
+	return sdk.ExchangeRateListWithContext(context.Background(), currency)
+}
+
+func (sdk *Cryptomus) ExchangeRateListWithContext(ctx context.Context, currency string) (*ExchangeRateResponse, error) {
 	url := fmt.Sprintf(ExchangeRateListEndpoint.URL(), currency)
 
 	var result ExchangeRateResponse

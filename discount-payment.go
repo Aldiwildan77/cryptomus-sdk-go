@@ -17,7 +17,11 @@ type ListOfDiscountResponse struct {
 	Result ListOfDiscount `json:"result"`
 }
 
-func (sdk *Cryptomus) ListOfDiscount(ctx context.Context) (*ListOfDiscountResponse, error) {
+func (sdk *Cryptomus) ListOfDiscount() (*ListOfDiscountResponse, error) {
+	return sdk.ListOfDiscountWithContext(context.Background())
+}
+
+func (sdk *Cryptomus) ListOfDiscountWithContext(ctx context.Context) (*ListOfDiscountResponse, error) {
 
 	var result ListOfDiscountResponse
 
@@ -46,7 +50,11 @@ type SetDiscountToPaymentMethodResponse struct {
 	Result Discount `json:"result,omitempty"`
 }
 
-func (sdk *Cryptomus) SetDiscountToPaymentMethod(ctx context.Context, request SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
+func (sdk *Cryptomus) SetDiscountToPaymentMethod(request SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
+	return sdk.SetDiscountToPaymentMethodWithContext(context.Background(), request)
+}
+
+func (sdk *Cryptomus) SetDiscountToPaymentMethodWithContext(ctx context.Context, request SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
 
 	var result SetDiscountToPaymentMethodResponse
 

@@ -47,7 +47,11 @@ type RecurringPaymentData struct {
 	LastPayOff     *time.Time `json:"last_pay_off,omitempty"`
 }
 
-func (sdk *Cryptomus) CreateRecurringPayment(ctx context.Context, request CreateRecurringPaymentRequest) (*CreateRecurringPaymentResponse, error) {
+func (sdk *Cryptomus) CreateRecurringPayment(request CreateRecurringPaymentRequest) (*CreateRecurringPaymentResponse, error) {
+	return sdk.CreateRecurringPaymentWithContext(context.Background(), request)
+}
+
+func (sdk *Cryptomus) CreateRecurringPaymentWithContext(ctx context.Context, request CreateRecurringPaymentRequest) (*CreateRecurringPaymentResponse, error) {
 	var result CreateRecurringPaymentResponse
 
 	reqByte, err := ToJSON(request)
@@ -56,6 +60,7 @@ func (sdk *Cryptomus) CreateRecurringPayment(ctx context.Context, request Create
 	}
 
 	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
 		SetBody(reqByte).
@@ -79,7 +84,11 @@ type RecurringPaymentInformationResponse struct {
 	Result RecurringPaymentData `json:"result,omitempty"`
 }
 
-func (sdk *Cryptomus) RecurringPaymentInformation(ctx context.Context, request RecurringPaymentInformationRequest) (*RecurringPaymentInformationResponse, error) {
+func (sdk *Cryptomus) RecurringPaymentInformation(request RecurringPaymentInformationRequest) (*RecurringPaymentInformationResponse, error) {
+	return sdk.RecurringPaymentInformationWithContext(context.Background(), request)
+}
+
+func (sdk *Cryptomus) RecurringPaymentInformationWithContext(ctx context.Context, request RecurringPaymentInformationRequest) (*RecurringPaymentInformationResponse, error) {
 	var result RecurringPaymentInformationResponse
 
 	reqByte, err := ToJSON(request)
@@ -88,6 +97,7 @@ func (sdk *Cryptomus) RecurringPaymentInformation(ctx context.Context, request R
 	}
 
 	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
 		SetBody(reqByte).
@@ -115,7 +125,11 @@ type ListRecurringPaymentsData struct {
 	Paginate *Pagination            `json:"paginate"`
 }
 
-func (sdk *Cryptomus) ListRecurringPayments(ctx context.Context, request ListRecurringPaymentsRequest) (*ListRecurringPaymentsResponse, error) {
+func (sdk *Cryptomus) ListRecurringPayments(request ListRecurringPaymentsRequest) (*ListRecurringPaymentsResponse, error) {
+	return sdk.ListRecurringPaymentsWithContext(context.Background(), request)
+}
+
+func (sdk *Cryptomus) ListRecurringPaymentsWithContext(ctx context.Context, request ListRecurringPaymentsRequest) (*ListRecurringPaymentsResponse, error) {
 	var result ListRecurringPaymentsResponse
 
 	reqByte, err := ToJSON(request)
@@ -124,6 +138,7 @@ func (sdk *Cryptomus) ListRecurringPayments(ctx context.Context, request ListRec
 	}
 
 	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
 		SetQueryParam("cursor", request.Cursor).
@@ -147,7 +162,11 @@ type CancelRecurringPaymentResponse struct {
 	Result RecurringPaymentData `json:"result,omitempty"`
 }
 
-func (sdk *Cryptomus) CancelRecurringPayment(ctx context.Context, request CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
+func (sdk *Cryptomus) CancelRecurringPayment(request CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
+	return sdk.CancelRecurringPaymentWithContext(context.Background(), request)
+}
+
+func (sdk *Cryptomus) CancelRecurringPaymentWithContext(ctx context.Context, request CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
 	var result CancelRecurringPaymentResponse
 
 	reqByte, err := ToJSON(request)
@@ -156,6 +175,7 @@ func (sdk *Cryptomus) CancelRecurringPayment(ctx context.Context, request Cancel
 	}
 
 	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
 		SetHeader("sign", Sign(sdk.PaymentToken, string(reqByte))).
 		SetBody(reqByte).

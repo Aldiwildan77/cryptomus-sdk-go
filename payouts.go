@@ -52,7 +52,11 @@ type CreatePayoutResponse struct {
 	Result *PayoutData `json:"result"`
 }
 
-func (sdk *Cryptomus) CreatePayout(ctx context.Context, payload *CreatePayoutRequest) (*CreatePayoutResponse, error) {
+func (sdk *Cryptomus) CreatePayout(payload *CreatePayoutRequest) (*CreatePayoutResponse, error) {
+	return sdk.CreatePayoutWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) CreatePayoutWithContext(ctx context.Context, payload *CreatePayoutRequest) (*CreatePayoutResponse, error) {
 	var result CreatePayoutResponse
 
 	payloadByte, err := ToJSON(payload)
@@ -85,7 +89,11 @@ type PayoutInformationResponse struct {
 	Result *PayoutData `json:"result"`
 }
 
-func (sdk *Cryptomus) PayoutInformation(ctx context.Context, payload *PayoutInformationRequest) (*PayoutInformationResponse, error) {
+func (sdk *Cryptomus) PayoutInformation(payload *PayoutInformationRequest) (*PayoutInformationResponse, error) {
+	return sdk.PayoutInformationWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) PayoutInformationWithContext(ctx context.Context, payload *PayoutInformationRequest) (*PayoutInformationResponse, error) {
 	var result PayoutInformationResponse
 
 	payloadByte, err := ToJSON(payload)
@@ -124,7 +132,11 @@ type PayoutHistoryResponse struct {
 	Result *PayoutHistoryData `json:"result"`
 }
 
-func (sdk *Cryptomus) PayoutHistory(ctx context.Context, payload *PayoutHistoryRequest) (*PayoutHistoryResponse, error) {
+func (sdk *Cryptomus) PayoutHistory(payload *PayoutHistoryRequest) (*PayoutHistoryResponse, error) {
+	return sdk.PayoutHistoryWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) PayoutHistoryWithContext(ctx context.Context, payload *PayoutHistoryRequest) (*PayoutHistoryResponse, error) {
 	var result PayoutHistoryResponse
 
 	payloadByte, err := ToJSON(payload)
@@ -170,7 +182,11 @@ type PayoutListOfServicesResponse struct {
 	Result []*PayoutListOfServicesData `json:"result"`
 }
 
-func (sdk *Cryptomus) PayoutListOfServices(ctx context.Context) (*PayoutListOfServicesResponse, error) {
+func (sdk *Cryptomus) PayoutListOfServices() (*PayoutListOfServicesResponse, error) {
+	return sdk.PayoutListOfServicesWithContext(context.Background())
+}
+
+func (sdk *Cryptomus) PayoutListOfServicesWithContext(ctx context.Context) (*PayoutListOfServicesResponse, error) {
 	var result PayoutListOfServicesResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -204,7 +220,11 @@ type TransferToPersonalWalletResponse struct {
 	Result *TransferToPersonalWalletData `json:"result"`
 }
 
-func (sdk *Cryptomus) TransferToPersonalWallet(ctx context.Context, payload *TransferToPersonalWalletRequest) (*TransferToPersonalWalletResponse, error) {
+func (sdk *Cryptomus) TransferToPersonalWallet(payload *TransferToPersonalWalletRequest) (*TransferToPersonalWalletResponse, error) {
+	return sdk.TransferToPersonalWalletWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) TransferToPersonalWalletWithContext(ctx context.Context, payload *TransferToPersonalWalletRequest) (*TransferToPersonalWalletResponse, error) {
 	var result TransferToPersonalWalletResponse
 
 	payloadByte, err := ToJSON(payload)
@@ -244,7 +264,11 @@ type TransferToBusinessWalletResponse struct {
 	Result *TransferToBusinessWalletData `json:"result"`
 }
 
-func (sdk *Cryptomus) TransferToBusinessWallet(ctx context.Context, payload *TransferToBusinessWalletRequest) (*TransferToBusinessWalletResponse, error) {
+func (sdk *Cryptomus) TransferToBusinessWallet(payload *TransferToBusinessWalletRequest) (*TransferToBusinessWalletResponse, error) {
+	return sdk.TransferToBusinessWalletWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) TransferToBusinessWalletWithContext(ctx context.Context, payload *TransferToBusinessWalletRequest) (*TransferToBusinessWalletResponse, error) {
 	var result TransferToBusinessWalletResponse
 
 	payloadByte, err := ToJSON(payload)

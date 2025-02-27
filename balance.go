@@ -28,7 +28,11 @@ type BalanceResult struct {
 	Balance Balance `json:"balance"`
 }
 
-func (sdk *Cryptomus) Balance(ctx context.Context) (*BalanceResponse, error) {
+func (sdk *Cryptomus) Balance() (*BalanceResponse, error) {
+	return sdk.BalanceWithContext(context.Background())
+}
+
+func (sdk *Cryptomus) BalanceWithContext(ctx context.Context) (*BalanceResponse, error) {
 	var result BalanceResponse
 
 	req := sdk.HttpClient.NewRequest().
