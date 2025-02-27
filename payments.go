@@ -64,7 +64,11 @@ type CreateInvoiceResponse struct {
 	Result CreateInvoiceData `json:"result"`
 }
 
-func (sdk *Cryptomus) CreateInvoice(ctx context.Context, payload *CreateInvoiceRequest) (*CreateInvoiceResponse, error) {
+func (sdk *Cryptomus) CreateInvoice(payload *CreateInvoiceRequest) (*CreateInvoiceResponse, error) {
+	return sdk.CreateInvoiceWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) CreateInvoiceWithContext(ctx context.Context, payload *CreateInvoiceRequest) (*CreateInvoiceResponse, error) {
 	var result CreateInvoiceResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -104,7 +108,11 @@ type CreateStaticWalletResponse struct {
 	Result CreateStaticWalletData `json:"result"`
 }
 
-func (sdk *Cryptomus) CreateStaticWallet(ctx context.Context, payload *CreateStaticWalletRequest) (*CreateStaticWalletResponse, error) {
+func (sdk *Cryptomus) CreateStaticWallet(payload *CreateStaticWalletRequest) (*CreateStaticWalletResponse, error) {
+	return sdk.CreateStaticWalletWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) CreateStaticWalletWithContext(ctx context.Context, payload *CreateStaticWalletRequest) (*CreateStaticWalletResponse, error) {
 	var result CreateStaticWalletResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -135,7 +143,11 @@ type GenerateQRCodeWalletResponse struct {
 	Result GenerateQRCodeWalletData `json:"result"`
 }
 
-func (sdk *Cryptomus) GenerateQRStaticWallet(ctx context.Context, payload *GenerateQRCodeWalletRequest) (*GenerateQRCodeWalletResponse, error) {
+func (sdk *Cryptomus) GenerateQRStaticWallet(payload *GenerateQRCodeWalletRequest) (*GenerateQRCodeWalletResponse, error) {
+	return sdk.GenerateQRStaticWalletWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) GenerateQRStaticWalletWithContext(ctx context.Context, payload *GenerateQRCodeWalletRequest) (*GenerateQRCodeWalletResponse, error) {
 	var result GenerateQRCodeWalletResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -166,7 +178,11 @@ type GenerateQRCodeInvoiceResponse struct {
 	Result GenerateQRCodeInvoiceData `json:"result"`
 }
 
-func (sdk *Cryptomus) GenerateQRCodeInvoice(ctx context.Context, payload *GenerateQRCodeInvoiceRequest) (*GenerateQRCodeInvoiceResponse, error) {
+func (sdk *Cryptomus) GenerateQRCodeInvoice(payload *GenerateQRCodeInvoiceRequest) (*GenerateQRCodeInvoiceResponse, error) {
+	return sdk.GenerateQRCodeInvoiceWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) GenerateQRCodeInvoiceWithContext(ctx context.Context, payload *GenerateQRCodeInvoiceRequest) (*GenerateQRCodeInvoiceResponse, error) {
 	var result GenerateQRCodeInvoiceResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -208,7 +224,11 @@ type BlockStaticWalletResponse struct {
 	Result BlockStaticWalletData `json:"result"`
 }
 
-func (sdk *Cryptomus) BlockStaticWallet(ctx context.Context, payload *BlockStaticWalletRequest) (*BlockStaticWalletResponse, error) {
+func (sdk *Cryptomus) BlockStaticWallet(payload *BlockStaticWalletRequest) (*BlockStaticWalletResponse, error) {
+	return sdk.BlockStaticWalletWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) BlockStaticWalletWithContext(ctx context.Context, payload *BlockStaticWalletRequest) (*BlockStaticWalletResponse, error) {
 	var result BlockStaticWalletResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -242,7 +262,11 @@ type RefundPaymentOnBlockedAddressResponse struct {
 	Result RefundPaymentOnBlockedAddressData `json:"result"`
 }
 
-func (sdk *Cryptomus) RefundPaymentOnBlockedAddress(ctx context.Context, payload *RefundPaymentOnBlockedAddressRequest) (*RefundPaymentOnBlockedAddressResponse, error) {
+func (sdk *Cryptomus) RefundPaymentOnBlockedAddress(payload *RefundPaymentOnBlockedAddressRequest) (*RefundPaymentOnBlockedAddressResponse, error) {
+	return sdk.RefundPaymentOnBlockedAddressWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) RefundPaymentOnBlockedAddressWithContext(ctx context.Context, payload *RefundPaymentOnBlockedAddressRequest) (*RefundPaymentOnBlockedAddressResponse, error) {
 	var result RefundPaymentOnBlockedAddressResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -274,7 +298,11 @@ type PaymentInformationResponse struct {
 	Result PaymentInformationData `json:"result"`
 }
 
-func (sdk *Cryptomus) PaymentInformation(ctx context.Context, payload *PaymentInformationRequest) (*PaymentInformationResponse, error) {
+func (sdk *Cryptomus) PaymentInformation(payload *PaymentInformationRequest) (*PaymentInformationResponse, error) {
+	return sdk.PaymentInformationWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) PaymentInformationWithContext(ctx context.Context, payload *PaymentInformationRequest) (*PaymentInformationResponse, error) {
 	var result PaymentInformationResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -306,7 +334,11 @@ type RefundResponse struct {
 	Result []RefundData `json:"result"`
 }
 
-func (sdk *Cryptomus) Refund(ctx context.Context, payload *RefundRequest) (*RefundResponse, error) {
+func (sdk *Cryptomus) Refund(payload *RefundRequest) (*RefundResponse, error) {
+	return sdk.RefundWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) RefundWithContext(ctx context.Context, payload *RefundRequest) (*RefundResponse, error) {
 	var result RefundResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -336,7 +368,11 @@ type ResendWebhookResponse struct {
 	Result []ResendWebhookData `json:"result"`
 }
 
-func (sdk *Cryptomus) ResendWebhook(ctx context.Context, payload *ResendWebhookRequest) (*ResendWebhookResponse, error) {
+func (sdk *Cryptomus) ResendWebhook(payload *ResendWebhookRequest) (*ResendWebhookResponse, error) {
+	return sdk.ResendWebhookWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) ResendWebhookWithContext(ctx context.Context, payload *ResendWebhookRequest) (*ResendWebhookResponse, error) {
 	var result ResendWebhookResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -386,7 +422,11 @@ type TestingWebhookResponse struct {
 	Result []TestingWebhookData `json:"result"`
 }
 
-func (sdk *Cryptomus) TestingWebhook(ctx context.Context, payload *TestingWebhookRequest) (*TestingWebhookResponse, error) {
+func (sdk *Cryptomus) TestingWebhook(payload *TestingWebhookRequest) (*TestingWebhookResponse, error) {
+	return sdk.TestingWebhookWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) TestingWebhookWithContext(ctx context.Context, payload *TestingWebhookRequest) (*TestingWebhookResponse, error) {
 	var result TestingWebhookResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -427,7 +467,11 @@ type PaymentListOfServicesResponse struct {
 	Result []PaymentListOfServicesData `json:"result"`
 }
 
-func (sdk *Cryptomus) PaymentListOfServices(ctx context.Context) (*PaymentListOfServicesResponse, error) {
+func (sdk *Cryptomus) PaymentListOfServices() (*PaymentListOfServicesResponse, error) {
+	return sdk.PaymentListOfServicesWithContext(context.Background())
+}
+
+func (sdk *Cryptomus) PaymentListOfServicesWithContext(ctx context.Context) (*PaymentListOfServicesResponse, error) {
 	var result PaymentListOfServicesResponse
 
 	req := sdk.HttpClient.NewRequest().
@@ -459,7 +503,11 @@ type PaymentHistoryResponse struct {
 	Result PaymentHistoryData `json:"result"`
 }
 
-func (sdk *Cryptomus) PaymentHistory(ctx context.Context, payload *PaymentHistoryRequest) (*PaymentHistoryResponse, error) {
+func (sdk *Cryptomus) PaymentHistory(payload *PaymentHistoryRequest) (*PaymentHistoryResponse, error) {
+	return sdk.PaymentHistoryWithContext(context.Background(), payload)
+}
+
+func (sdk *Cryptomus) PaymentHistoryWithContext(ctx context.Context, payload *PaymentHistoryRequest) (*PaymentHistoryResponse, error) {
 	var result PaymentHistoryResponse
 
 	req := sdk.HttpClient.NewRequest().
