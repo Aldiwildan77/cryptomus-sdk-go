@@ -17,9 +17,13 @@ var (
 	PaymentInformationEndpoint            Endpoint = "/v1/payment/info"
 	RefundEndpoint                        Endpoint = "/v1/payment/refund"
 	ResendWebhookEndpoint                 Endpoint = "/v1/payment/resend"
-	TestingWebhookEndpoint                Endpoint = "/v1/test-webhook/payment"
 	PaymentListOfServicesEndpoint         Endpoint = "/v1/payment/services"
 	PaymentHistoryEndpoint                Endpoint = "/v1/payment/list"
+
+	// Webhook
+	TestingWebhookPaymentEndpoint Endpoint = "/v1/test-webhook/payment"
+	TestingWebhookPayoutEndpoint  Endpoint = "/v1/test-webhook/payout"
+	TestingWebhookWalletEndpoint  Endpoint = "/v1/test-webhook/wallet"
 
 	// Payouts
 	CreatePayoutEndpoint             Endpoint = "/v1/payout"
