@@ -16,6 +16,8 @@ Cryptomus SDK Go is a Go library for interacting with the Cryptomus API. You can
 
 To install the Cryptomus SDK Go, you need to run the following command:
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/Aldiwildan77/cryptomus-sdk-go.svg)](https://pkg.go.dev/github.com/Aldiwildan77/cryptomus-sdk-go)
+
 ```bash
 go get github.com/Aldiwildan77/cryptomus-sdk-go
 ```
