@@ -8,6 +8,7 @@ var (
 
 var (
 	// Payments
+
 	CreateInvoiceEndpoint                 Endpoint = "/v1/payment"
 	CreateStaticWalletEndpoint            Endpoint = "/v1/wallet"
 	GenerateQRCodeWalletEndpoint          Endpoint = "/v1/wallet/qr"
@@ -21,11 +22,13 @@ var (
 	PaymentHistoryEndpoint                Endpoint = "/v1/payment/list"
 
 	// Webhook
+
 	TestingWebhookPaymentEndpoint Endpoint = "/v1/test-webhook/payment"
 	TestingWebhookPayoutEndpoint  Endpoint = "/v1/test-webhook/payout"
 	TestingWebhookWalletEndpoint  Endpoint = "/v1/test-webhook/wallet"
 
 	// Payouts
+
 	CreatePayoutEndpoint             Endpoint = "/v1/payout"
 	PayoutInformationEndpoint        Endpoint = "/v1/payout/info"
 	PayoutHistoryEndpoint            Endpoint = "/v1/payout/list"
@@ -34,19 +37,23 @@ var (
 	TransferToBusinessWalletEndpoint Endpoint = "/v1/transfer/to-business"
 
 	// Recurring Payments
+
 	CreateRecurringPaymentEndpoint      Endpoint = "/v1/recurrence/create"
 	RecurringPaymentInformationEndpoint Endpoint = "/v1/recurrence/info"
 	ListRecurringPaymentsEndpoint       Endpoint = "/v1/recurrence/list"
 	CancelRecurringPaymentEndpoint      Endpoint = "/v1/recurrence/cancel"
 
 	// Exchange Rate
+
 	ExchangeRateListEndpoint Endpoint = "/v1/exchange-rate/%s/list"
 
 	// Discount Payment
+
 	ListOfDiscountsEndpoint            Endpoint = "/v1/payment/discount/list"
 	SetDiscountToPaymentMethodEndpoint Endpoint = "/v1/payment/discount/set"
 
 	// Balance
+
 	BalanceEndpoint Endpoint = "/v1/balance"
 )
 
