@@ -12,7 +12,7 @@ go get github.com/Aldiwildan77/cryptomus-sdk-go
 
 ## Usage
 
-Here is an example of how to use the Cryptomus SDK Go:
+Here is an example of how to use the Cryptomus SDK Go, you can see the full example in the [examples](examples) directory.
 
 ### Create Invoice
 
@@ -50,3 +50,7 @@ func main() {
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+[Muhammad Wildan Aldiansyah](https://aldiwildan.me)
