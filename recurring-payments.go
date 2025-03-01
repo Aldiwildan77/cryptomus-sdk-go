@@ -219,7 +219,7 @@ func (sdk *Cryptomus) ListRecurringPaymentsWithContext(ctx context.Context, payl
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetHeader("sign", Sign(sdk.PaymentToken, nil)).
 		SetQueryParam("cursor", payload.Cursor).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)

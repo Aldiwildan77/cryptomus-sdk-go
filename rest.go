@@ -26,9 +26,14 @@ type Pagination struct {
 }
 
 func Sign(apiKey string, data interface{}) string {
-	body, _ := json.Marshal(data)
-	encodedData := base64.StdEncoding.EncodeToString(body)
-	combined := encodedData + apiKey
+	combined := apiKey
+
+	if data != nil && data != "" {
+		body, _ := json.Marshal(data)
+		encodedData := base64.StdEncoding.EncodeToString(body)
+		combined = encodedData + apiKey
+	}
+
 	hash := md5.Sum([]byte(combined))
 	return hex.EncodeToString(hash[:])
 }

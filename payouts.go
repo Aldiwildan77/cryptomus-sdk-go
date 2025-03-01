@@ -318,7 +318,7 @@ func (sdk *Cryptomus) PayoutListOfServicesWithContext(ctx context.Context) (*Pay
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PayoutToken, "")).
+		SetHeader("sign", Sign(sdk.PayoutToken, nil)).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
 

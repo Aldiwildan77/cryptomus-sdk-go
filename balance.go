@@ -68,10 +68,12 @@ func (sdk *Cryptomus) BalanceWithContext(ctx context.Context) (*BalanceResponse,
 
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
+		SetHeader("merchant", sdk.Merchant).
+		SetHeader("sign", Sign(sdk.PaymentToken, nil)).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
 
-	if _, err := req.Get(BalanceEndpoint.URL()); err != nil {
+	if _, err := req.Post(BalanceEndpoint.URL()); err != nil {
 		return nil, err
 	}
 
