@@ -47,10 +47,44 @@ type RecurringPaymentData struct {
 	LastPayOff     *time.Time `json:"last_pay_off,omitempty"`
 }
 
+// CreateRecurringPayment creates a recurring payment.
+//
+// Details: https://doc.cryptomus.com/business/recurring/creating
+//
+// Example:
+//
+//	result, err := sdk.CreateRecurringPayment(CreateRecurringPaymentRequest{
+//		Amount:   "0.0001",
+//		Currency: "BTC",
+//		Name:     "Test recurring payment",
+//		Period:   RecurringPaymentPeriodWeekly,
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) CreateRecurringPayment(request CreateRecurringPaymentRequest) (*CreateRecurringPaymentResponse, error) {
 	return sdk.CreateRecurringPaymentWithContext(context.Background(), request)
 }
 
+// CreateRecurringPaymentWithContext creates a recurring payment.
+//
+// Details: https://doc.cryptomus.com/business/recurring/creating
+//
+// Recurring payments in cryptocurrency are a way to automate regular transactions using digital assets. They can be useful for subscription-based services, donations, memberships, and other recurring payments.
+//
+// To use recurring payments, you need to create a payment that specifies the amount, currency, and frequency of the payments, and then share it with your payers. The payer will be redirected to the cryptomus website, where he will need to log in to confirm the payment plan and make the first payment. After that, payments will be made automatically according to the plan.
+//
+// Example:
+//
+//	result, err := sdk.CreateRecurringPaymentWithContext(ctx, CreateRecurringPaymentRequest{
+//		Amount:   "0.0001",
+//		Currency: "BTC",
+//		Name:     "Test recurring payment",
+//		Period:   RecurringPaymentPeriodWeekly,
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) CreateRecurringPaymentWithContext(ctx context.Context, payload CreateRecurringPaymentRequest) (*CreateRecurringPaymentResponse, error) {
 	var result CreateRecurringPaymentResponse
 
@@ -84,10 +118,36 @@ type RecurringPaymentInformationResponse struct {
 	Result RecurringPaymentData `json:"result,omitempty"`
 }
 
+// RecurringPaymentInformation returns information about a recurring payment.
+//
+// Details: https://doc.cryptomus.com/business/recurring/info
+//
+// Example:
+//
+//	result, err := sdk.RecurringPaymentInformation(RecurringPaymentInformationRequest{
+//		UUID: "4b1b3b7b-7b1b-4b1b-7b1b-4b1b3b7b1b4b",
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) RecurringPaymentInformation(request RecurringPaymentInformationRequest) (*RecurringPaymentInformationResponse, error) {
 	return sdk.RecurringPaymentInformationWithContext(context.Background(), request)
 }
 
+// RecurringPaymentInformationWithContext returns information about a recurring payment.
+//
+// Details: https://doc.cryptomus.com/business/recurring/info
+//
+// To get the recurring payment status you need to pass one of the required parameters, if you pass both, the account will be identified by order_id
+//
+// Example:
+//
+//	result, err := sdk.RecurringPaymentInformation(ctx, RecurringPaymentInformationRequest{
+//		UUID: "4b1b3b7b-7b1b-4b1b-7b1b-4b1b3b7b1b4b",
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) RecurringPaymentInformationWithContext(ctx context.Context, payload RecurringPaymentInformationRequest) (*RecurringPaymentInformationResponse, error) {
 	var result RecurringPaymentInformationResponse
 
@@ -125,10 +185,34 @@ type ListRecurringPaymentsData struct {
 	Paginate *Pagination            `json:"paginate"`
 }
 
+// ListRecurringPayments returns a list of recurring payments.
+//
+// Details: https://doc.cryptomus.com/business/recurring/list
+//
+// Example:
+//
+//	result, err := sdk.ListRecurringPayments(ListRecurringPaymentsRequest{
+//		Cursor: "eyJpZCI6MjEyLCJfcG9pbnRzVzVG9OZhXh0SXRlbXMiOnRydWV9",
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) ListRecurringPayments(request ListRecurringPaymentsRequest) (*ListRecurringPaymentsResponse, error) {
 	return sdk.ListRecurringPaymentsWithContext(context.Background(), request)
 }
 
+// ListRecurringPaymentsWithContext returns a list of recurring payments.
+//
+// Details: https://doc.cryptomus.com/business/recurring/list
+//
+// Example:
+//
+//	result, err := sdk.ListRecurringPaymentsWithContext(ctx, ListRecurringPaymentsRequest{
+//		Cursor: "eyJpZCI6MjEyLCJfcG9pbnRzVzFG9OZhXh0SXRlbXMiOnRydWV9",
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) ListRecurringPaymentsWithContext(ctx context.Context, payload ListRecurringPaymentsRequest) (*ListRecurringPaymentsResponse, error) {
 	var result ListRecurringPaymentsResponse
 
@@ -157,10 +241,38 @@ type CancelRecurringPaymentResponse struct {
 	Result RecurringPaymentData `json:"result,omitempty"`
 }
 
+// CancelRecurringPayment cancels a recurring payment.
+//
+// Details: https://doc.cryptomus.com/business/recurring/cancel
+//
+// To cancel the recurring payment you need to pass one of the required parameters, if you pass both, the account will be identified by order_id
+//
+// Example:
+//
+//	result, err := sdk.CancelRecurringPayment(CancelRecurringPaymentRequest{
+//		UUID: "4b1b3b7b-7b1b-4b1b-7b1b-4b1b3b7b1b4b",
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) CancelRecurringPayment(payload CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
 	return sdk.CancelRecurringPaymentWithContext(context.Background(), payload)
 }
 
+// CancelRecurringPaymentWithContext cancels a recurring payment.
+//
+// Details: https://doc.cryptomus.com/business/recurring/cancel
+//
+// To cancel the recurring payment you need to pass one of the required parameters, if you pass both, the account will be identified by order_id
+//
+// Example:
+//
+//	result, err := sdk.CancelRecurringPaymentWithContext(ctx, CancelRecurringPaymentRequest{
+//		UUID: "4b1b3b7b-7b1b-4b1b-7b1b-4b1b3b7b1b4b",
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) CancelRecurringPaymentWithContext(ctx context.Context, payload CancelRecurringPaymentRequest) (*CancelRecurringPaymentResponse, error) {
 	var result CancelRecurringPaymentResponse
 
