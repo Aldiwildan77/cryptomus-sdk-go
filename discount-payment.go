@@ -5,9 +5,12 @@ import (
 )
 
 type Discount struct {
+	// Currency code (e.g. BTC, ETH, USDT, etc.)
 	Currency string `json:"currency"`
-	Network  string `json:"network"`
-	Discount int    `json:"discount"`
+	// Blockchain network (e.g. ARBITRUM, AVALANCHE, BCH, etc.)
+	Network string `json:"network"`
+	// Discount percent (e.g. 5, 10, -15, etc.)
+	Discount int `json:"discount"`
 }
 
 type ListOfDiscount []Discount
@@ -17,10 +20,30 @@ type ListOfDiscountResponse struct {
 	Result ListOfDiscount `json:"result"`
 }
 
+// ListOfDiscount returns a list of discounts.
+//
+// Details: https://doc.cryptomus.com/business/discount/list
+//
+// Example:
+//
+//	result, err := sdk.ListOfDiscount()
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) ListOfDiscount() (*ListOfDiscountResponse, error) {
 	return sdk.ListOfDiscountWithContext(context.Background())
 }
 
+// ListOfDiscountWithContext returns a list of discounts.
+//
+// Details: https://doc.cryptomus.com/business/discount/list
+//
+// Example:
+//
+//	result, err := sdk.ListOfDiscountWithContext(ctx)
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) ListOfDiscountWithContext(ctx context.Context) (*ListOfDiscountResponse, error) {
 
 	var result ListOfDiscountResponse
@@ -40,9 +63,12 @@ func (sdk *Cryptomus) ListOfDiscountWithContext(ctx context.Context) (*ListOfDis
 }
 
 type SetDiscountToPaymentMethodRequest struct {
+	// Currency code (e.g. BTC, ETH, USDT, etc.)
 	Currency string `json:"currency"`
-	Network  string `json:"network"`
-	Discount int    `json:"discount_percent"`
+	// Blockchain network (e.g. ARBITRUM, AVALANCHE, BCH, etc.)
+	Network string `json:"network"`
+	// Discount percent (e.g. 5, 10, -15, etc.)
+	Discount int `json:"discount_percent"`
 }
 
 type SetDiscountToPaymentMethodResponse struct {
@@ -50,10 +76,42 @@ type SetDiscountToPaymentMethodResponse struct {
 	Result Discount `json:"result,omitempty"`
 }
 
+// SetDiscountToPaymentMethod sets a discount to a payment method.
+//
+// Details: https://doc.cryptomus.com/business/discount/set
+//
+// Discount Percent:
+//   - Positive Numbers (>0): Provides buyers a discount for paying with a coin.
+//     Useful for promotions or encouraging payments with a particular cryptocurrency.
+//   - Negative Numbers (<0): Adds a percentage (padding) for paying with a coin.
+//     This can help cover crypto/fiat conversion costs or adjust for local exchange differences.
+//
+// Example:
+//
+//	err := sdk.SetDiscountToPaymentMethod(payload)
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) SetDiscountToPaymentMethod(payload SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
 	return sdk.SetDiscountToPaymentMethodWithContext(context.Background(), payload)
 }
 
+// SetDiscountToPaymentMethodWithContext sets a discount to a payment method.
+//
+// Details: https://doc.cryptomus.com/business/discount/set
+//
+// Discount Percent:
+//   - Positive Numbers (>0): Provides buyers a discount for paying with a coin.
+//     Useful for promotions or encouraging payments with a particular cryptocurrency.
+//   - Negative Numbers (<0): Adds a percentage (padding) for paying with a coin.
+//     This can help cover crypto/fiat conversion costs or adjust for local exchange differences.
+//
+// Example:
+//
+//	err := sdk.SetDiscountToPaymentMethodWithContext(ctx, payload)
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
 func (sdk *Cryptomus) SetDiscountToPaymentMethodWithContext(ctx context.Context, payload SetDiscountToPaymentMethodRequest) (*SetDiscountToPaymentMethodResponse, error) {
 
 	var result SetDiscountToPaymentMethodResponse
