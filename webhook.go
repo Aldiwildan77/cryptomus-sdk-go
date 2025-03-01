@@ -2,6 +2,72 @@ package cryptomus
 
 import "context"
 
+type ResendWebhookRequest struct {
+	UUID    string `json:"uuid,omitempty"`
+	OrderID string `json:"order_id,omitempty"`
+}
+
+type ResendWebhookData struct{}
+
+type ResendWebhookResponse struct {
+	*HTTPResponse
+	Result []ResendWebhookData `json:"result"`
+}
+
+// ResendWebhook resends a webhook.
+//
+// Details: https://doc.cryptomus.com/business/payments/resend-webhook
+//
+// Resend the webhook by invoice. You can resend the webhook only for finalized invoices, that is, invoices in statuses: wrong_amount, paid, paid_over.
+//
+// To resend the webhook on the invoice, the url_callback must be specified at the time of invoice creation.
+//
+// Example:
+//
+//	result, err := sdk.ResendWebhook(&ResendWebhookRequest{
+//		OrderID: "9d7f7b9b-3b7b-4b7b-9b7b-7b9d7f7b9b7b",
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
+func (sdk *Cryptomus) ResendWebhook(payload *ResendWebhookRequest) (*ResendWebhookResponse, error) {
+	return sdk.ResendWebhookWithContext(context.Background(), payload)
+}
+
+// ResendWebhookWithContext resends a webhook.
+//
+// Details: https://doc.cryptomus.com/business/payments/resend-webhook
+//
+// Resend the webhook by invoice. You can resend the webhook only for finalized invoices, that is, invoices in statuses: wrong_amount, paid, paid_over.
+//
+// To resend the webhook on the invoice, the url_callback must be specified at the time of invoice creation.
+//
+// Example:
+//
+//	result, err := sdk.ResendWebhookWithContext(ctx, &ResendWebhookRequest{
+//		OrderID: "9d7f7b9b-3b7b-4b7b-9b7b-7b9d7f7b9b7b",
+//	})
+//	if err != nil {
+//	    log.Fatal(err)
+//	}
+func (sdk *Cryptomus) ResendWebhookWithContext(ctx context.Context, payload *ResendWebhookRequest) (*ResendWebhookResponse, error) {
+	var result ResendWebhookResponse
+
+	req := sdk.HttpClient.NewRequest().
+		SetContext(ctx).
+		SetHeader("merchant", sdk.Merchant).
+		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetBody(payload).
+		SetSuccessResult(&result).
+		SetErrorResult(&result)
+
+	if _, err := req.Post(ResendWebhookEndpoint.URL()); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
 type TestingWebhookPaymentRequest struct {
 	URLCallback string        `json:"url_callback"`
 	Currency    string        `json:"currency"`
