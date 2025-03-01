@@ -125,7 +125,7 @@ func (sdk *Cryptomus) CreatePayoutWithContext(ctx context.Context, payload *Crea
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetHeader("sign", Sign(sdk.PayoutToken, payload)).
 		SetBody(payload).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -185,7 +185,7 @@ func (sdk *Cryptomus) PayoutInformationWithContext(ctx context.Context, payload 
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetHeader("sign", Sign(sdk.PayoutToken, payload)).
 		SetBody(payload).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -249,7 +249,7 @@ func (sdk *Cryptomus) PayoutHistoryWithContext(ctx context.Context, payload *Pay
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetHeader("sign", Sign(sdk.PayoutToken, payload)).
 		SetBody(payload).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -318,7 +318,7 @@ func (sdk *Cryptomus) PayoutListOfServicesWithContext(ctx context.Context) (*Pay
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, "")).
+		SetHeader("sign", Sign(sdk.PayoutToken, "")).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
 
@@ -382,7 +382,7 @@ func (sdk *Cryptomus) TransferToPersonalWalletWithContext(ctx context.Context, p
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetHeader("sign", Sign(sdk.PayoutToken, payload)).
 		SetBody(payload).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
@@ -447,7 +447,7 @@ func (sdk *Cryptomus) TransferToBusinessWalletWithContext(ctx context.Context, p
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
 		SetHeader("merchant", sdk.Merchant).
-		SetHeader("sign", Sign(sdk.PaymentToken, payload)).
+		SetHeader("sign", Sign(sdk.PayoutToken, payload)).
 		SetBody(payload).
 		SetSuccessResult(&result).
 		SetErrorResult(&result)
