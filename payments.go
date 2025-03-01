@@ -685,7 +685,7 @@ const (
 	PaymentStatusLocked             PaymentStatus = "locked"               // Funds are locked due to the AML program.
 )
 
-type TestingWebhookRequest struct {
+type TestingWebhookPaymentRequest struct {
 	URLCallback string        `json:"url_callback"`
 	Currency    string        `json:"currency"`
 	Network     string        `json:"network"`
@@ -694,14 +694,14 @@ type TestingWebhookRequest struct {
 	Status      PaymentStatus `json:"status"`
 }
 
-type TestingWebhookData struct{}
+type TestingWebhookPaymentData struct{}
 
-type TestingWebhookResponse struct {
+type TestingWebhookPaymentResponse struct {
 	*HTTPResponse
-	Result []TestingWebhookData `json:"result"`
+	Result []TestingWebhookPaymentData `json:"result"`
 }
 
-// TestingWebhook tests a webhook.
+// TestingWebhookPayment tests a webhook.
 //
 // Details: https://doc.cryptomus.com/business/payments/testing-webhook
 //
@@ -716,7 +716,7 @@ type TestingWebhookResponse struct {
 //
 // Example:
 //
-//	result, err := sdk.TestingWebhook(&TestingWebhookRequest{
+//	result, err := sdk.TestingWebhookPayment(&TestingWebhookRequest{
 //		UUID:        "4b1b3b7b-7b1b-4b1b-7b1b-4b1b3b7b1b4b",
 //		URLCallback: "https://example.com/callback",
 //		Currency:    "USD",
@@ -726,11 +726,11 @@ type TestingWebhookResponse struct {
 //	if err != nil {
 //	    log.Fatal(err)
 //	}
-func (sdk *Cryptomus) TestingWebhook(payload *TestingWebhookRequest) (*TestingWebhookResponse, error) {
-	return sdk.TestingWebhookWithContext(context.Background(), payload)
+func (sdk *Cryptomus) TestingWebhookPayment(payload *TestingWebhookPaymentRequest) (*TestingWebhookPaymentResponse, error) {
+	return sdk.TestingWebhookPaymentWithContext(context.Background(), payload)
 }
 
-// TestingWebhookWithContext tests a webhook.
+// TestingWebhookPaymentWithContext tests a webhook.
 //
 // Details: https://doc.cryptomus.com/business/payments/testing-webhook
 //
@@ -745,7 +745,7 @@ func (sdk *Cryptomus) TestingWebhook(payload *TestingWebhookRequest) (*TestingWe
 //
 // Example:
 //
-//	result, err := sdk.TestingWebhookWithContext(ctx, &TestingWebhookRequest{
+//	result, err := sdk.TestingWebhookPaymentWithContext(ctx, &TestingWebhookRequest{
 //		UUID:        "4b1b3b7b-7b1b-4b1b-7b1b-4b1b3b7b1b4b",
 //		URLCallback: "https://example.com/callback",
 //		Currency:    "USD",
@@ -755,8 +755,8 @@ func (sdk *Cryptomus) TestingWebhook(payload *TestingWebhookRequest) (*TestingWe
 //	if err != nil {
 //	    log.Fatal(err)
 //	}
-func (sdk *Cryptomus) TestingWebhookWithContext(ctx context.Context, payload *TestingWebhookRequest) (*TestingWebhookResponse, error) {
-	var result TestingWebhookResponse
+func (sdk *Cryptomus) TestingWebhookPaymentWithContext(ctx context.Context, payload *TestingWebhookPaymentRequest) (*TestingWebhookPaymentResponse, error) {
+	var result TestingWebhookPaymentResponse
 
 	req := sdk.HttpClient.NewRequest().
 		SetContext(ctx).
