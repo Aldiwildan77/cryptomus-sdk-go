@@ -142,7 +142,7 @@ func (sdk *Cryptomus) RecurringPaymentInformation(request RecurringPaymentInform
 //
 // Example:
 //
-//	result, err := sdk.RecurringPaymentInformation(ctx, RecurringPaymentInformationRequest{
+//	result, err := sdk.RecurringPaymentInformationWithContext(ctx, RecurringPaymentInformationRequest{
 //		UUID: "4b1b3b7b-7b1b-4b1b-7b1b-4b1b3b7b1b4b",
 //	})
 //	if err != nil {

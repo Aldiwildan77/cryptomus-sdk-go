@@ -173,7 +173,7 @@ func (sdk *Cryptomus) PayoutInformation(payload *PayoutInformationRequest) (*Pay
 //
 // Example:
 //
-//	result, err := sdk.PayoutInformation(ctx, &PayoutInformationRequest{
+//	result, err := sdk.PayoutInformationWithContext(ctx, &PayoutInformationRequest{
 //		UUID: "4b1b3b7b-7b1b-4b1b-7b1b-4b1b3b7b1b4b",
 //	})
 //	if err != nil {
